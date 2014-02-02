@@ -26,6 +26,9 @@ void setup() {
   // String Array
   joinedCharacters = new String[wordLength];
   
+  // Text
+  theWord = "try me";
+  
 }
 
 
@@ -36,7 +39,7 @@ void draw() {
   background(0);
   
   // Word
-  text(theWord, width/3, height/2);
+  text(theWord, width/2 - 128, height/2);
   
 }
 
@@ -45,7 +48,9 @@ void draw() {
 
 void mousePressed() {
   
+  println("------");
   theWord = generateWord();
+  println("------");
   
 }
 
@@ -53,13 +58,13 @@ void mousePressed() {
 
 String generateWord() {
   String  randomWord = "";
-  println("Random Word is empty");
+  println("Random Word is empty\n");
   
   for(int i = 0; i < wordLength; i++) {
      joinedCharacters[i] = generateCharacter();
      println("Joined Characters Array #" + i + " is being set to " + joinedCharacters[i]);
      randomWord = join(joinedCharacters, "");
-     println("Random Word is being appended to be " + randomWord);
+     println("Random Word is being appended to be " + randomWord + "\n");
   }
 
   println("Now Random Word is " + randomWord);  
