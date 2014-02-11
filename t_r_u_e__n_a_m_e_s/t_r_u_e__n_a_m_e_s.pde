@@ -1,10 +1,12 @@
 
 // VARIABLES
 
-int screenState = 0;  
 
 String alphabet = "abcdefghijklmnopqrstuvwxzy";
-int wordLength = 5;
+String onlyVowels = "aeiouy"; // 6
+String onlyConsonants = "bcdfghjklmnpqrstvwxz"; // 20
+String[] vowels;
+int wordLength = 6;
 String theWord = "";
 String[] joinedCharacters;
 
@@ -25,6 +27,14 @@ void setup() {
   
   // String Array
   joinedCharacters = new String[wordLength];
+  
+  vowels =  new String[6];
+  vowels[0] = "a";
+  vowels[1] = "e";
+  vowels[2] = "i";
+  vowels[3] = "o";
+  vowels[4] = "u";
+  vowels[5] = "y";
   
   // Text
   theWord = "try me";
@@ -67,16 +77,22 @@ String generateWord() {
   for(int i = 0; i < wordLength; i++) {
     // If We Are The First Character, Choose Anything
     if(i == 0) {
-      joinedCharacters[i] = generateCharacter();
+      joinedCharacters[i] = generateCharacter(25);
       println("Joined Characters Array #" + i + " is being set to " + joinedCharacters[i]);      
     }
     // Otherwise Lets Try To Alternate Vowels And Consonants
     else {
-      if(joinedCharacters[i-1].equals("a")) {
-        
+      for(int j = 0; j < vowels.length; j++) {
+        if(joinedCharacters[i-1].equals(vowels[j])) {
+          joinedCharacters[i] = generateCharacter(20);
+          println("Joined Characters Array #" + i + " is being set to " + joinedCharacters[i] + " and should be a consonsant");
+        }
+        else {      
+          joinedCharacters[i] = generateCharacter(6);
+          println("Joined Characters Array #" + i + " is being set to " + joinedCharacters[i] + " and should be a vowel");
+        }
       }
-      joinedCharacters[i] = generateCharacter();
-      println("Joined Characters Array #" + i + " is being set to " + joinedCharacters[i]);
+
     }
      
     // Join The Latest Character To The Rest Of The Word
@@ -89,11 +105,33 @@ String generateWord() {
   return randomWord;
 }
 
-String generateCharacter() {
+String generateCharacter(int stringLength) {
+  println("String is " + stringLength);
   
-  // Generate A Random Character From Somewhere In The Alphabet
-  char tmpChar = alphabet.charAt(int(random(25)));
-  print("Random Character is " + tmpChar);
+  // Store TMP
+  char tmpChar = 'i';
+  
+  // Any Letter
+  if(stringLength == 25) {
+    // Generate A Random Character From Somewhere In The Alphabet
+    tmpChar = alphabet.charAt(int(random(stringLength)));
+    println("Random Character is " + tmpChar);
+  }
+  
+  // Pick A Vowel
+  if(stringLength == 6) {
+    // Generate A Random Character From Somewhere In The Alphabet
+    tmpChar = onlyVowels.charAt(int(random(stringLength)));
+    println("Random Character is " + tmpChar);
+  }
+  
+  // Pick A Consonant
+  if(stringLength == 20) {
+    // Generate A Random Character From Somewhere In The Alphabet
+    tmpChar = onlyConsonants.charAt(int(random(stringLength)));
+    print("Random Character is " + tmpChar);
+  }
+  
   
   // Convert It To A String
   String randomLetter = Character.toString(tmpChar);
