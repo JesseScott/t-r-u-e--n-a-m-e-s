@@ -16,7 +16,8 @@ PFont mainFont;
 
 void setup() {
   // Screen
-  size(1280, 720);
+  size(displayWidth, displayHeight);
+  orientation(LANDSCAPE);
   smooth();
   background(0);
   fill(255);
